@@ -22,7 +22,7 @@
 * Ep 6:
     * No script, just some basic theory about vectors.
 * Ep 7:
-    * `ep07.cpp`, vector.lisp, add some vector types.
+    * `ep07.cpp`, `vector.h`, add some vector types.
 * Ep 8:
     * `ep08.cpp`, particle.lisp, add a particle type that handles a position and velocity vector.
 * Ep 9:
