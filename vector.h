@@ -8,7 +8,8 @@ struct vec2
     double x;
     double y;
 
-    vec2(double x=0, double y=0, double length=0, double angle=0) : x(x), y(y) {
+    vec2(double x=0, double y=0, double length=0, double angle=0) : x(x), y(y)
+    {
         if (length != 0)
             set_length(length);
         if (angle != 0)
@@ -29,13 +30,19 @@ struct vec2
         x = cos(angle) * length;
         y = sin(angle) * length;
     }
-    double distance(const vec2& v) const {
+    double distance(const vec2& v) const
+    {
         return sqrt(pow(v.x - x, 2) + pow(v.y - y, 2));
     }
 
     vec2 operator+(const vec2& v) const
     {
         return vec2(x + v.x, y + v.y);
+    }
+    void operator+=(const vec2& v)
+    {
+        x += v.x;
+        y += v.y;
     }
     vec2 operator-(const vec2& v) const
     {
