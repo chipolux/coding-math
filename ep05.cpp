@@ -131,5 +131,6 @@ void loop()
         draw_arrow(x, y, mouse_angle);
 
         SDL_RenderPresent(RENDERER);
+        SDL_Delay(15);
     }
 }

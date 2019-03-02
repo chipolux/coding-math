@@ -93,5 +93,6 @@ void loop()
         }
 
         SDL_RenderPresent(RENDERER);
+        SDL_Delay(15);
     }
 }
