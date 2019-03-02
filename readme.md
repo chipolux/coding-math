@@ -24,7 +24,7 @@
 * Ep 7:
     * `ep07.cpp`, `vector.h`, add some vector types.
 * Ep 8:
-    * `ep08.cpp`, particle.lisp, add a particle type that handles a position and velocity vector.
+    * `ep08.cpp`, `particle.h`, add a particle type that handles a position and velocity vector.
 * Ep 9:
     * `ep09.cpp`, create and accelerate our particles to make fireworks.
 * Ep 10:
