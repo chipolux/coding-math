@@ -1,6 +1,6 @@
-#[Coding Math](https://www.youtube.com/playlist?list=PL7wAPgl1JVvUEb0dIygHzO4698tmcwLk9)
+# [Coding Math](https://www.youtube.com/playlist?list=PL7wAPgl1JVvUEb0dIygHzO4698tmcwLk9)
 
-##Setup
+## Setup
 * Linux:
     * `apt install clang`
     * `apt install libsdl2-2.0-0 libsdl2-dev libsdl2-gfx-1.0-0 libsdl2-gfx-dev`
@@ -8,7 +8,7 @@
     * `brew install llvm`
     * `brew install sdl2 sdl2_gfx`
 
-##Episodes
+## Episodes
 * Ep 1:
     * No script, just an introduction.
 * Ep 2:

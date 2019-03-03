@@ -1,6 +1,6 @@
-#[Coding Math](https://www.youtube.com/playlist?list=PL7wAPgl1JVvUEb0dIygHzO4698tmcwLk9)
+# [Coding Math](https://www.youtube.com/playlist?list=PL7wAPgl1JVvUEb0dIygHzO4698tmcwLk9)
 
-##Setup
+## Setup
 * Linux:
     * Install libffi-dev and libsdl2-dev.
 * Windows:
@@ -16,7 +16,7 @@
         * Add `msys64/usr/bin` to your path. (so you can access gcc, etc.)
 
 
-##Episodes
+## Episodes
 First: `(ql:quickload :sketch)`
 
 * Ep 1:
