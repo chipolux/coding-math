@@ -1,13 +1,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <iostream>
+#include <algorithm>
 
 #include "vector.h"
 #include "particle.h"
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
-const char* TITLE = "Coding Math - Ep. 10";
+const char TITLE[] = "Coding Math - Ep. 10";
 
 const Sint16 BODY_X[] = {16,  2,  2,   5,  -4,  -6, -6, -4,  5, 2, 2, 16};
 const Sint16 BODY_Y[] = { 0, -4, -7, -10, -12, -10, 10, 12, 10, 7, 4,  0};
@@ -115,6 +116,7 @@ void loop()
     double angle = 0;
     int turning = 0;
     bool thrusting = false;
+    char vel_str[] = "Velocity: 00.00";
 
     while (!quit)
     {
@@ -152,6 +154,7 @@ void loop()
         if (thrusting) { thrust.set_length(0.1); }
         else { thrust.set_length(0); }
         ship.accelerate(thrust);
+        ship.velocity.set_length(std::min(15.0, ship.velocity.get_length()));
         ship.update();
         if (ship.position.x < 0)
             ship.position.x = WIDTH;
@@ -162,6 +165,9 @@ void loop()
         if (ship.position.y > HEIGHT)
             ship.position.y = 0;
         draw_ship(ship, angle, thrusting);
+
+        sprintf(vel_str, "Velocity: %5.2f", ship.velocity.get_length());
+        stringRGBA(RENDERER, 10, 10, vel_str, 0xe8, 0x61, 0x00, 0xff);
 
         SDL_RenderPresent(RENDERER);
         SDL_Delay(15);
