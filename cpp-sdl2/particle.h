@@ -9,12 +9,14 @@ struct particle
     vec2 position;
     vec2 velocity;
     vec2 gravity;
+    double mass;
 
-    particle(double x=0, double y=0, double s=0, double d=0, double g=0)
+    particle(double x=0, double y=0, double s=0, double d=0, double g=0, double m=1)
     {
         position = vec2(x, y);
         velocity = vec2(0, 0, s, d);
         gravity = vec2(0, g);
+        mass = m;
     }
 
     void update() { velocity += gravity; position += velocity; }
@@ -24,6 +26,27 @@ struct particle
     {
         velocity.set_length(speed);
         velocity.set_angle(direction);
+    }
+
+    double angleTo(const particle& p)
+    {
+        return atan2(p.position.y - position.y, p.position.x - position.x);
+    }
+
+    double distanceTo(const particle& p)
+    {
+        double dx = p.position.x - position.x;
+        double dy = p.position.y - position.y;
+        return sqrt(dx * dx + dy * dy);
+    }
+
+    void gravitateTo(const particle& p)
+    {
+        vec2 grav = vec2(0, 0);
+        double dist = distanceTo(p);
+        grav.set_length(p.mass / (dist * dist));
+        grav.set_angle(angleTo(p));
+        velocity += grav;
     }
 };
 
