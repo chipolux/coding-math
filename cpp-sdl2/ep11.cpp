@@ -9,12 +9,6 @@ const int WIDTH = 800;
 const int HEIGHT = 600;
 const char* TITLE = "Coding Math - Ep. 11";
 
-/* const Sint16 BODY_X[] = {16,  2,  2,   5,  -4,  -6, -6, -4,  5, 2, 2, 16}; */
-/* const Sint16 BODY_Y[] = { 0, -4, -7, -10, -12, -10, 10, 12, 10, 7, 4,  0}; */
-
-/* const Sint16 FLAME_X[] = {-6, -12, -9, -15, -9, -12, -6}; */
-/* const Sint16 FLAME_Y[] = {-6,  -5, -2,   0,  2,   5,  6}; */
-
 SDL_Window* WINDOW;
 SDL_Renderer* RENDERER;
 
