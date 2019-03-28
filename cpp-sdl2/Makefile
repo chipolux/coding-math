@@ -7,3 +7,6 @@ build: $(BIN_FILES)
 
 bin/%: %.cpp
 	clang++ $^ $(CPPFLAGS) -o $@
+
+clean:
+	rm -f bin/ep*
