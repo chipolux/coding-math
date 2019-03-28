@@ -52,4 +52,10 @@ struct particle
     }
 };
 
+std::ostream& operator<<(std::ostream& os, const particle &p)
+{
+    os << "Particle(" << p.position << ", " << p.velocity << ")";
+    return os;
+}
+
 #endif  // PARTICLE_H

@@ -58,4 +58,10 @@ struct vec2
     }
 };
 
+std::ostream& operator<<(std::ostream& os, const vec2 &v)
+{
+    os << "(" << v.x << "," << v.y << ")";
+    return os;
+}
+
 #endif  // VECTOR_H
