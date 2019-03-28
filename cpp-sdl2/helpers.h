@@ -15,10 +15,7 @@ double randf()
 
 
 // SDL2 Helpers
-SDL_Window* WINDOW;
-SDL_Renderer* RENDERER;
-
-bool init(const char* title, const int WIDTH, const int HEIGHT)
+bool init(SDL_Window* &window, SDL_Renderer* &renderer, const char* title, const int width, const int height)
 {
     bool success = true;
 
@@ -29,22 +26,22 @@ bool init(const char* title, const int WIDTH, const int HEIGHT)
     }
     else
     {
-        WINDOW = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-        if (WINDOW == nullptr)
+        window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
+        if (window == nullptr)
         {
             std::cout << "Failed to create window:" << SDL_GetError() << std::endl;
             success = false;
         }
         else
         {
-            RENDERER = SDL_CreateRenderer(WINDOW, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-            if (RENDERER == nullptr)
+            renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            if (renderer == nullptr)
             {
                 std::cout << "Failed to create renderer:" << SDL_GetError() << std::endl;
             }
             else
             {
-                SDL_RenderSetLogicalSize(RENDERER, WIDTH, HEIGHT);
+                SDL_RenderSetLogicalSize(renderer, width, height);
             }
         }
     }
@@ -52,9 +49,9 @@ bool init(const char* title, const int WIDTH, const int HEIGHT)
     return success;
 }
 
-void close()
+void close(SDL_Window* &window)
 {
-    SDL_DestroyWindow(WINDOW);
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 

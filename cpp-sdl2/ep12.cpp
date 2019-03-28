@@ -8,18 +8,19 @@
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
-const char* TITLE = "Coding Math - Ep. 12";
+SDL_Window* WINDOW;
+SDL_Renderer* RENDERER;
 
 void loop();
 
 int main(int argc, char* args[])
 {
-    if (init(TITLE, WIDTH, HEIGHT))
+    if (init(WINDOW, RENDERER, "Coding Math - Ep. 12", WIDTH, HEIGHT))
     {
         loop();
     }
 
-    close();
+    close(WINDOW);
     return 0;
 }
 
