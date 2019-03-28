@@ -10,13 +10,15 @@ struct particle
     vec2 velocity;
     vec2 gravity;
     double mass;
+    double radius;
 
-    particle(double x=0, double y=0, double s=0, double d=0, double g=0, double m=1)
+    particle(double x=0, double y=0, double s=0, double d=0, double g=0, double m=1, double r=0)
     {
         position = vec2(x, y);
         velocity = vec2(0, 0, s, d);
         gravity = vec2(0, g);
         mass = m;
+        radius = r;
     }
 
     void update() { velocity += gravity; position += velocity; }
