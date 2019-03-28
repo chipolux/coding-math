@@ -5,10 +5,12 @@
 
 #include "vector.h"
 #include "particle.h"
+#include "helpers.h"
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
-const char TITLE[] = "Coding Math - Ep. 10";
+SDL_Window* WINDOW;
+SDL_Renderer* RENDERER;
 
 const Sint16 BODY_X[] = {16,  2,  2,   5,  -4,  -6, -6, -4,  5, 2, 2, 16};
 const Sint16 BODY_Y[] = { 0, -4, -7, -10, -12, -10, 10, 12, 10, 7, 4,  0};
@@ -16,62 +18,17 @@ const Sint16 BODY_Y[] = { 0, -4, -7, -10, -12, -10, 10, 12, 10, 7, 4,  0};
 const Sint16 FLAME_X[] = {-6, -12, -9, -15, -9, -12, -6};
 const Sint16 FLAME_Y[] = {-6,  -5, -2,   0,  2,   5,  6};
 
-SDL_Window* WINDOW;
-SDL_Renderer* RENDERER;
-
-bool init(const char* title);
-void close();
 void loop();
 
 int main(int argc, char* args[])
 {
-    if (init(TITLE))
+    if (init(WINDOW, RENDERER, "Coding Math - Ep. 10", WIDTH, HEIGHT))
     {
         loop();
     }
 
-    close();
+    close(WINDOW);
     return 0;
-}
-
-bool init(const char* title)
-{
-    bool success = true;
-
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-    {
-        std::cout << "Failed to initialize SDL:" << SDL_GetError() << std::endl;
-        success = false;
-    }
-    else
-    {
-        WINDOW = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-        if (WINDOW == nullptr)
-        {
-            std::cout << "Failed to create window:" << SDL_GetError() << std::endl;
-            success = false;
-        }
-        else
-        {
-            RENDERER = SDL_CreateRenderer(WINDOW, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-            if (RENDERER == nullptr)
-            {
-                std::cout << "Failed to create renderer:" << SDL_GetError() << std::endl;
-            }
-            else
-            {
-                SDL_RenderSetLogicalSize(RENDERER, WIDTH, HEIGHT);
-            }
-        }
-    }
-
-    return success;
-}
-
-void close()
-{
-    SDL_DestroyWindow(WINDOW);
-    SDL_Quit();
 }
 
 void draw_ship(const particle& p, const double angle, const bool thrusting)
@@ -122,15 +79,11 @@ void loop()
     {
         while (SDL_PollEvent(&e) != 0)
         {
-            if (e.type == SDL_QUIT)
-            {
-                quit = true;
-            }
-            else if (e.type == SDL_KEYDOWN && !e.key.repeat)
+            quit = is_quit(e);
+            if (e.type == SDL_KEYDOWN && !e.key.repeat)
             {
                 switch (e.key.keysym.sym)
                 {
-                    case SDLK_ESCAPE: quit = true; break;
                     case SDLK_LEFT: turning = -1; break;
                     case SDLK_RIGHT: turning = 1; break;
                     case SDLK_UP: thrusting = true; break;

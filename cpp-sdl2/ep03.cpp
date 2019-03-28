@@ -2,65 +2,24 @@
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <iostream>
 
+#include "helpers.h"
+
 const int WIDTH = 400;
 const int HEIGHT = 400;
-
 SDL_Window* WINDOW;
 SDL_Renderer* RENDERER;
 
-bool init(const char* title);
-void close();
 void loop();
 
 int main(int argc, char* args[])
 {
-    if (init("Coding Math - Ep. 3"))
+    if (init(WINDOW, RENDERER, "Coding Math - Ep. 3", WIDTH, HEIGHT))
     {
         loop();
     }
 
-    close();
+    close(WINDOW);
     return 0;
-}
-
-bool init(const char* title)
-{
-    bool success = true;
-
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-    {
-        std::cout << "Failed to initialize SDL:" << SDL_GetError() << std::endl;
-        success = false;
-    }
-    else
-    {
-        WINDOW = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-        if (WINDOW == nullptr)
-        {
-            std::cout << "Failed to create window:" << SDL_GetError() << std::endl;
-            success = false;
-        }
-        else
-        {
-            RENDERER = SDL_CreateRenderer(WINDOW, -1, SDL_RENDERER_ACCELERATED);
-            if (RENDERER == nullptr)
-            {
-                std::cout << "Failed to create renderer:" << SDL_GetError() << std::endl;
-            }
-            else
-            {
-                SDL_RenderSetLogicalSize(RENDERER, WIDTH, HEIGHT);
-            }
-        }
-    }
-
-    return success;
-}
-
-void close()
-{
-    SDL_DestroyWindow(WINDOW);
-    SDL_Quit();
 }
 
 void loop()
@@ -81,10 +40,7 @@ void loop()
     {
         while (SDL_PollEvent(&e) != 0)
         {
-            if (e.type == SDL_QUIT)
-            {
-                quit = true;
-            }
+            quit = is_quit(e);
         }
         SDL_SetRenderDrawColor(RENDERER, 0x33, 0x33, 0x33, 0xff);
         SDL_RenderClear(RENDERER);
